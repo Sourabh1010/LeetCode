@@ -1,0 +1,48 @@
+/*
+Runtime: 20 ms
+Memory Usage: 11 MB
+The idea is to get every character inside a map with its index as the value.
+As soon as we find the next occurence of that particular character we find the distance between them.
+If the calculated distance is greater then the previously saved max distance then we update the max distance.
+Side by side we are using variable 'j' to consider the case when a character only comes once and its distance
+from the last character is greater then the max between two characters.
+*/
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<char, int> hmap;
+        
+        int Max = 0;
+        int len = s.length();
+        
+        for (int i = 0,j = 0; i < len; i++)
+        {
+            if(hmap.find(s[i]) != hmap.end())
+            {
+                j = max(j, hmap[s[i]] + 1);
+            }
+            hmap[s[i]] = i;
+            Max = max(Max, i-j+1);
+        }
+        return Max;
+    }
+};
+
+
+
+/*
+Python3
+Runtime: 72 ms
+Memory Usage: 13.9 MB
+*/
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        dic, res, start, = {}, 0,0
+        for i, ch in enumerate (s):
+            if ch in dic:
+                start = max(start, dic[ch]+1)
+            res = max(res, i-start+1)
+            dic[ch] = i
+            
+        return res

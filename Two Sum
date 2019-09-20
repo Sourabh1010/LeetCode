@@ -1,6 +1,10 @@
-/* Rather then adding two numbers and comparing it with target, we iterate through the vector subtract the current element from the
+/* 
+Rather then adding two numbers and comparing it with target, we iterate through the vector subtract the current element from the
 target value and find the resultant inside the hmap. If the resultant is available in the map we return the current element index and the new
-resultant index, else we put the currrent value in the hmap with its index. */
+resultant index, else we put the currrent value in the hmap with its index. 
+Runtime: 12 ms
+Memory Usage: 10.2 MB
+*/
 
 class Solution {
 public:

@@ -5,6 +5,9 @@
  *     ListNode *next;
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
+ 
+ Runtime: 20 ms
+ Memory Usage: 10.3 MB
  */
  
 class Solution {

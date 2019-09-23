@@ -15,3 +15,23 @@ public:
         return (ans < INT_MIN || ans > INT_MAX)? 0:ans;
     }
 };
+
+
+/*
+Python3
+Runtime: 36 ms
+Memory Usage: 13.9 MB
+*/
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        if x < 0:
+            return -1*self.reverseUtil(-x)
+        return self.reverseUtil(x)
+    
+    def reverseUtil(self, x) -> int:
+        ans = 0
+        while x != 0:
+            ans = (ans*10) + (x%10)
+            x = int(x/10)
+        return 0 if ans > pow(2,31)-1 or ans  < -pow(2,31) else ans

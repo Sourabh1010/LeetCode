@@ -1,0 +1,33 @@
+/*
+Runtime: 8 ms
+Memory Usage: 11.5 MB
+*/
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        vector<int> arr;
+        if(x < 0)
+            return false;
+        if(x < 10)
+            return true;
+        while(x)
+        {
+            arr.push_back(x%10);
+            x = x/10;
+        }
+        int i = 0;
+        int j = arr.size()-1;
+        while(i < j)
+        {
+            if(arr[i] == arr[j])
+            {
+                i++;
+                j--;
+            }
+            else
+                return false;
+        }
+        return true;
+    }
+};

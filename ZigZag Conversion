@@ -1,0 +1,27 @@
+/*
+Runtime: 16 ms
+Memory Usage: 12.7 MB
+
+Insert the string into a matrix with N rows. When the row is complete we simply go to the next column and add the elements from
+second last row till the second row in the same column.Then go to the next column and repeat the first for loop.
+*/
+
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        vector<string> matrix(numRows, "");
+        string ans;
+        int len = s.length();
+        int i = 0;
+        
+        while (i < len)
+        {
+            for (int j = 0; j < numRows && i < len; j++)
+                matrix[j].push_back(s[i++]);
+            for (int j = numRows-2; j >= 1 && i < len; j--)
+                matrix[j].push_back(s[i++]);
+        }
+        for (string v : matrix) ans += v;
+        return ans;
+    }
+};

@@ -1,0 +1,50 @@
+/*
+We use the idea from 2 sum. We subtract the target from every element, it gives us the new target.
+now we simply find out two numbers whose sum is equal to the new target.
+*/
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> result;
+        
+        if (nums.size() < 3)
+            return result;
+        
+        sort(nums.begin(), nums.end());
+        
+        for(int i = 0; i < nums.size()-2; i++)
+        {
+            int target = -1 * nums[i];
+            int front = i+1;
+            int back = nums.size()-1;
+            
+            if(target < 0)
+                break;
+            while (front < back)
+            {
+                int sum = nums[front] + nums[back];
+                if(sum < target)
+                    front++;
+                else if(sum > target)
+                    back--;
+                else
+                {
+                    vector<int> temp(3,0);
+                    temp[0] = nums[i];
+                    temp[1] = nums[front];
+                    temp[2] = nums[back];
+                    
+                    result.push_back(temp);
+                    
+                    while (front < back && nums[front] == temp[1])
+                        front++;
+                    while (front < back && nums[back] == temp[2])
+                        back--;
+                }
+            }
+            while (i+1 < nums.size() && nums[i] == nums[i+1])
+                i++;
+        }
+        return result;
+    }
+};

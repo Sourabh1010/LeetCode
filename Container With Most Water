@@ -1,0 +1,43 @@
+/*
+Runtime: 16 ms
+Memory Usage: 9.8 MB
+The best approach i could come up with was to find the area with the highest length, doing this ensures that the
+area of previous value could only be greater if and only if the height is greater then the previous case.
+*/
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int water = 0;
+        int i = 0;
+        int j = height.size()-1;
+        
+        while (i < j)
+        {
+            int h = min(height[i], height[j]);
+            water = max(water, h*(j-i));
+            while (height[i] <= h && i < j) i++;
+            while (height[j] <= h && i < j) j--;
+        }
+        return water;
+    }
+};
+
+/*
+Runtime: 136 ms
+Memory Usage: 15.5 MB
+*/
+
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        water, i, j = 0, 0, len(height)-1
+        
+        while i < j:
+            h = min(height[i], height[j])
+            water = max(water, h*(j-i))
+            while (h >= height[i]) and (i < j):
+                i = i+1
+            while (h >= height[j]) and (i < j):
+                j = j-1
+                
+        return water

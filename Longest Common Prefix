@@ -1,0 +1,44 @@
+/*
+Runtime: 8 ms
+Memory Usage: 9.1 MB
+I did it by comparing every string in the array, a better approach would be to sort the vector and then compare first and last element.
+This will give you the right answer.
+*/
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string ans = "";
+        int s = strs.size();
+        if(s == 0)
+            return ans;
+        if(s == 1)
+            return strs[0];
+        string temp = strs[0];
+        int index = temp.length();
+        for(int i = 0; i < s-1; i++)
+        {
+            if(index == 0)
+                return ans;
+            int j = i+1;
+            string str1 = strs[i];
+            string str2 = strs[j];
+            int strSize = (str1.length() < str2.length())?str1.length():str2.length();
+            int k = 0;
+            while(k < strSize && k < index)
+            {
+                if(str1[k] == str2[k])
+                    k++;
+                else
+                {
+                    index = k;
+                }
+            }
+            index = k;
+        }
+        for(int l = 0; l < index; l++)
+        {
+            ans += temp[l];
+        }
+        return ans;
+    }
+};

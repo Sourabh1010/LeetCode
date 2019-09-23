@@ -1,0 +1,38 @@
+/*
+Runtime: 0 ms
+Memory Usage: 17.3 MB
+Done using recurssion. Easy to understand, basic recurssion applied.
+*/
+
+class Solution {
+public:
+    vector<string> result;
+    
+    void helper(string str, int left, int right)
+    {
+        if (left)          helper(str+'(', left-1, right);
+        if(right > left)    helper(str+')', left, right-1);
+        if(!right)          result.push_back(str);
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        helper("", n, n);
+        return result;
+    }
+};
+
+
+/*
+Python3
+Runtime: 36 ms
+Memory Usage: 14.1 MB
+*/
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        def generate(p, left, right, parens = []):
+            if left:        generate(p+'(', left-1, right)
+            if right > left:generate(p+')', left, right-1)
+            if not right:   parens += p,
+            return parens
+        return generate('', n, n)

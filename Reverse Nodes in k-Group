@@ -1,0 +1,47 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+ 
+ // Same as swap pairs. The only difference is that here we check the next K nodes if they are NULL or not and if not then
+ // we swap the K nodes.
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        int count = 0;
+        ListNode *prev = NULL;
+        ListNode *nex = NULL;
+        ListNode *curr = head;
+        
+        if(k < 2)
+            return head;
+        
+        while(count < k-1)
+        {
+            if(curr == NULL || curr -> next == NULL)
+                return head;
+            curr = curr -> next;
+            count++;
+        }
+        curr = head;
+        count = 0;
+        
+        while(count < k)
+        {
+            nex = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = nex;
+            count++;
+        }
+        if (nex != NULL)
+        {
+            head -> next = reverseKGroup(nex, k);
+        }
+        return prev;
+    }
+};

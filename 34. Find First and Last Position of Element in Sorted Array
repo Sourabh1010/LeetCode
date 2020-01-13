@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int lower;
+        int upper;
+        vector<int> ans;
+        if(nums.size() == 0)
+        {
+            ans.push_back(-1);
+            ans.push_back(-1);
+            return ans;
+        }
+        lower = distance(nums.begin(),lower_bound(nums.begin(), nums.end(), target));
+        if(lower < nums.size() && nums[lower] == target)
+        {
+            ans.push_back(lower);
+            upper = distance(nums.begin(),upper_bound(nums.begin(), nums.end(), target)) - 1;
+            ans.push_back(upper);
+            return ans;
+        }
+        ans.push_back(-1);
+        ans.push_back(-1);
+        return ans;
+    }
+};

@@ -1,0 +1,57 @@
+class Solution {
+public:
+    string getPermutation(int n, int k) {
+        string temp = "1";
+        if(n == 0)
+            return "";
+        if(n == 1 || k == 0)
+            return temp;
+        for(int i = 2; i <= n; i++)
+        {
+            temp += ('0'+i);
+        }
+        int count = 1;
+        while(count < k)
+        {
+            nextPermutation(temp);
+           // cout << temp;
+            count++;
+        }
+        return temp;
+    }
+    
+private:
+    void nextPermutation(string& temp)
+    {
+        int n = temp.size()-1;
+        int i = n;
+        int j = n;
+        char t;
+        while(i > 0 && temp[i] < temp[i-1])
+            i--;
+        i--;
+        while(j > i)
+        {
+            if(temp[j] < temp[i])
+            {
+                j--;
+            }
+            else if(temp[j] > temp[j-1] && temp[j-1] > temp[i])
+            {
+                j--;
+            }
+            else
+            {
+                //cout << "S before: "<< temp;
+                t = temp[i];
+                temp[i] = temp[j];
+                temp[j] = t;
+                i++;
+                //cout << "S after: " << temp;
+                break;
+            }
+        }
+        sort(temp.begin()+(i), temp.end());
+        //cout << "After Sort: "<< temp << endl;
+    }
+};

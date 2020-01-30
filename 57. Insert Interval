@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        intervals.push_back(newInterval);
+        sort(intervals.begin(), intervals.end());
+        vector<vector<int>> ans;
+        vector<int> first;
+        vector<int> sec;
+        ans.push_back(intervals[0]);
+        int count = 0;
+        
+        for(int i = 1; i < intervals.size(); i++)
+        {
+            first = ans[count];
+            sec = intervals[i];
+            
+            if(first[1] >= sec[0])
+            {
+                if(first[1] < sec[1])
+                {
+                    first[1] = sec[1];
+                    ans[count] = first;
+                }
+            }
+            else
+            {
+                ans.push_back(sec);
+                count++;
+            }
+        }
+        return ans;
+    }
+};

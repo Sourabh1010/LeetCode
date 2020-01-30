@@ -1,0 +1,29 @@
+class Solution {
+    
+private:
+    void permute(vector<int> nums, vector<vector<int>> &result, int index)
+    {
+        if(index == nums.size())
+        {
+            result.push_back(nums);
+            return;
+        }
+        for(int i = index; i < nums.size(); i++)
+        {
+            if(index == i || nums[i] != nums[index])
+            {
+                swap(nums[i], nums[index]);
+                permute(nums, result, index+1);
+            }
+        }
+    }
+    
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>> result;
+        sort(nums.begin(), nums.end());
+        
+        permute(nums, result, 0);
+        return result;
+    }
+};
